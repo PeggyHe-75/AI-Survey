@@ -9,6 +9,7 @@
 - 实时统计看板与筛选
 - CSV 明细导出
 - 普及率、使用渗透率、稳定使用率和节约工时统计
+- 公司／集团AI培训参与率与ACE AI认证统计
 
 > 重要：直接双击 HTML 可以预览页面，但要让所有人提交到同一个数据库，必须完成下方云端配置并部署到网页地址。
 
@@ -52,6 +53,10 @@ SUPABASE_ANON_KEY: "你的 anon public key"
 ```
 
 还可以修改问卷名称和组织名称。
+
+### 已运行过旧版数据库脚本时
+
+如果你此前已经运行过旧版 `supabase-setup.sql`，请在 Supabase 的 **SQL Editor** 中完整运行 `supabase-update-v2.sql`。该脚本只会新增“集团AI培训”和“ACE AI证书”两个字段，不会删除或覆盖已有问卷数据。
 
 ## 三、设置管理员邮件登录
 
@@ -100,6 +105,5 @@ SUPABASE_ANON_KEY: "你的 anon public key"
 - `index.html`：问卷和统计看板
 - `config.js`：云端连接与问卷名称配置
 - `supabase-setup.sql`：数据库表、去重约束和访问权限
+- `supabase-update-v2.sql`：旧版数据库增加集团培训及ACE认证字段
 - `README.md`：部署说明
-
-- GitHub Pages deployment

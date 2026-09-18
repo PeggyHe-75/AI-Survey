@@ -21,10 +21,19 @@ create table if not exists public.survey_responses (
   saved_time text not null,
   barriers text[] not null default '{}',
   barrier_other text,
+  company_ai_training text not null default '未填写',
+  ace_ai_certificate text not null default '未填写',
   submitted_at timestamptz not null default now(),
   constraint respondent_code_unique unique (respondent_code),
   constraint respondent_code_length check (char_length(trim(respondent_code)) between 2 and 50)
 );
+
+-- 兼容已创建过旧版数据表的项目：重复运行也不会报错。
+alter table public.survey_responses
+  add column if not exists company_ai_training text not null default '未填写';
+
+alter table public.survey_responses
+  add column if not exists ace_ai_certificate text not null default '未填写';
 
 create table if not exists public.survey_admins (
   email text primary key,
@@ -47,6 +56,8 @@ with check (
   and work_usage <> ''
   and frequency <> ''
   and saved_time <> ''
+  and company_ai_training <> ''
+  and ace_ai_certificate <> ''
 );
 
 drop policy if exists "admins_can_read_responses" on public.survey_responses;
@@ -73,5 +84,5 @@ create index if not exists survey_responses_submitted_at_idx
 
 -- 必须修改：把下面邮箱替换成统计看板管理员邮箱。
 insert into public.survey_admins (email)
-values ('your.name@company.com')
+values ('peghe3@publicisgroupe.net')
 on conflict (email) do nothing;
