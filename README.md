@@ -101,3 +101,5 @@ SUPABASE_ANON_KEY: "你的 anon public key"
 - `config.js`：云端连接与问卷名称配置
 - `supabase-setup.sql`：数据库表、去重约束和访问权限
 - `README.md`：部署说明
+
+- GitHub Pages deployment
